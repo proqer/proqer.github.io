@@ -1,105 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <meta charset="utf-8">
-    <title>Дейкстра</title>
-	<script>
-		var size = 15;
-		const changeTable = () => {
-			let table = document.getElementById('table');
-			let inputSize = document.getElementById('size');
-			let res = '';
-			size = +inputSize.value;
-			size = size <= 16? size: 16; 
-			res += '<tr>';
-			res += '<td></td>'
-			for (let j = 0; j < size; j++) {
-				res += `<td><b>x<sub>${j+1}</sub></b></td>`;
-			}
-			res += '</tr>';
-			for (let i = 0; i < size; i++) {
-				res += '<tr>';
-				for (let j = 0; j < size + 1; j++) {
-					if (j == 0) {
-						res += `<td><b>x<sub>${i+1}</sub></b></td>`;
-					} else {
-						res += `<td><div contenteditable>${i == j - 1 ? 0 : 99}</div></td>`;
-					}
-				}
-				res += '</tr>';
-			}
-			res = `<tbody>${res}</tbody>`
-			table.innerHTML = res;
-		}
-		
-		const solve = () => {
-			clearRecords();
-			let boolArr = new Array(size);
-			boolArr.fill(true);
-			let arr = new Array(size);
-			for (let i = 0; i < size; i++) {
-				arr[i] = new Array(size);
-			}
-			let table = document.getElementById('table');
-			for (let i = 0; i < size; i++) {
-				for (let j = 0; j < size; j++) {
-					arr[i][j] = +table.firstElementChild.children[i + 1].children[j + 1].firstElementChild.outerText;
-				}
-			}
-			
-			let pathLengthArr = new Array(size);
-			pathLengthArr.fill(99);
-			pathLengthArr[0] = 0;
-			
-			boolArr[0] = false;
-			addRecord(`y = x<sub>1</sub>`);
-			let current = 0;
-			
-			for (let i = 0; i < size - 1; i++) {
-				let min = 99;
-				let minCoef = 0;
-
-				for (let j = 0; j < size; j++) {
-					if (boolArr[j]) {
-						let resStr = `d(x<sub>${j + 1}</sub>) = min{d(x<sub>${j + 1}</sub>), d(x<sub>${current + 1}</sub>) + a(x<sub>${current + 1}</sub>, x<sub>${j + 1}</sub>)} = min{${pathLengthArr[j] == 99 ? '&#8734;' : pathLengthArr[j]}, ${pathLengthArr[current]} + ${arr[current][j] == 99 ? '&#8734;' : arr[current][j]}} = `
-						pathLengthArr[j] = Math.min(pathLengthArr[j], pathLengthArr[current] + arr[current][j]);
-						if (pathLengthArr[j] < min) {
-							minCoef = j;
-							min = pathLengthArr[j];
-						}
-						resStr += `${pathLengthArr[j] == 99 ? '&#8734;' : pathLengthArr[j]}`;
-						addRecord(resStr);
-					}
-				}
-				boolArr[minCoef] = false;
-				addRecord(`y = x<sub>${minCoef + 1}</sub>`);
-				current = minCoef;
-			}
-	
-		}
-		
-		const addRecord = (str) => {
-			const res = document.getElementById('res');
-			res.innerHTML += `<p>${str}</p>`;
-		}
-		
-		const clearRecords = () => {
-			const res = document.getElementById('res');
-			res.innerHTML = '';
-		}
-	</script>
+	  <meta charset="utf-8">
+	  <title>Дейкстра</title>
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
   <body>
-		<div style="margin-left: 30%">
-			Размеры матрицы: <input id="size" maxlength="2" size="40" value="15">
-			<button onClick="changeTable()" style="margin-bottom: 10px">построить</button>
-			<table id="table" border="1" cellpadding="10">
-			
-			<tbody>
-			 </tbody>
-			</table>
-			<button onClick="solve()" style="margin-top: 10px">Решить</button>
-			<div id="res"></div>
-		</div>
+	<div class="container">
+	  <button class="btn btn-secondary btn-lg" onclick="location.href='/dijkstra'" style="margin-top: 50px">Алгоритм Дейкстры</button>
+	</div>
   </body>
 </html>
