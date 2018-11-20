@@ -55,7 +55,7 @@ const solve = () => {
 			for (let j = 0; j < size; j++) {
 				if (i != j) {
 					arrNext[i][j] = Math.min(arr[i][m] + arr[m][j], arr[i][j]);
-					addRecord(`d<sup>${m + 1}</sup><sub>${i+1} ${j+1}</sub> = min{d<sup>${m}</sup><sub>${i+1} ${m+1}</sub> + d<sup>${m}</sup><sub>${m+1} ${j+1}</sub>, d<sup>${m}</sup><sub>${i+1} ${j+1}</sub>} = min {${arr[i][m] == Infinity? '&#8734;' : arr[i][m]} + ${arr[m][j] == Infinity? '&#8734;' : arr[m][j]}, ${arr[i][j] == Infinity? '&#8734;' : arr[i][j]}} = ${arrNext[i][j] == Infinity? '&#8734;' : arr[i][j]}`);
+					addRecord(`d<sup>${m + 1}</sup><sub>${i+1} ${j+1}</sub> = min{d<sup>${m}</sup><sub>${i+1} ${m+1}</sub> + d<sup>${m}</sup><sub>${m+1} ${j+1}</sub>, d<sup>${m}</sup><sub>${i+1} ${j+1}</sub>} = min {${arr[i][m] == Infinity? '&#8734;' : arr[i][m]} + ${arr[m][j] == Infinity? '&#8734;' : arr[m][j]}, ${arr[i][j] == Infinity? '&#8734;' : arr[i][j]}} = ${arrNext[i][j] == Infinity? '&#8734;' : arrNext[i][j]}`);
 				}
 				else {
 					arrNext[i][j] = 0;
