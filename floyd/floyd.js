@@ -46,7 +46,7 @@ const solve = () => {
 
 	addTable(arr, 0);
 
-	for (let m = 0; m < size > 6 ? 6 : size; m++) {
+	for (let m = 0; m < (size > 6 ? 6 : size); m++) {
 		let arrNext = new Array(size);
 		for (let i = 0; i < size; i++) {
 			arrNext[i] = new Array(size);
