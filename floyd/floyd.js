@@ -17,7 +17,7 @@ const changeTable = () => {
 			if (j == 0) {
 				res += `<td><b>x<sub>${i + 1}</sub></b></td>`;
 			} else {
-				res += `<td><div contenteditable>${i == j - 1 ? 0 : 99}</div></td>`;
+				res += `<td><div contenteditable>${i == j - 1 ? 0 : '&#8734;'}</div></td>`;
 			}
 		}
 		res += '</tr>';
@@ -36,13 +36,17 @@ const solve = () => {
 	let table = document.getElementById('table');
 	for (let i = 0; i < size; i++) {
 		for (let j = 0; j < size; j++) {
-			arr[i][j] = +table.firstElementChild.children[i + 1].children[j + 1].firstElementChild.outerText;
+			if (table.firstElementChild.children[i + 1].children[j + 1].firstElementChild.outerText == '∞'){
+				arr[i][j] = Infinity;
+			} else {
+				arr[i][j] = +table.firstElementChild.children[i + 1].children[j + 1].firstElementChild.outerText;
+			}
 		}
 	}
 
 	addTable(arr, 0);
 
-	for (let m = 0; m < size; m++) {
+	for (let m = 0; m < size > 6 ? 6 : size; m++) {
 		let arrNext = new Array(size);
 		for (let i = 0; i < size; i++) {
 			arrNext[i] = new Array(size);
@@ -51,7 +55,7 @@ const solve = () => {
 			for (let j = 0; j < size; j++) {
 				if (i != j) {
 					arrNext[i][j] = Math.min(arr[i][m] + arr[m][j], arr[i][j]);
-					addRecord(`d<sup>${m + 1}</sup><sub>${i+1} ${j+1}</sub> = min{d<sup>${m}</sup><sub>${i+1} ${m+1}</sub> + d<sup>${m}</sup><sub>${m+1} ${j+1}</sub>, d<sup>${m}</sup><sub>${i+1} ${j+1}</sub>} = min {${arr[i][m]} + ${arr[m][j]}, ${arr[i][j]}} = ${arrNext[i][j]}`);
+					addRecord(`d<sup>${m + 1}</sup><sub>${i+1} ${j+1}</sub> = min{d<sup>${m}</sup><sub>${i+1} ${m+1}</sub> + d<sup>${m}</sup><sub>${m+1} ${j+1}</sub>, d<sup>${m}</sup><sub>${i+1} ${j+1}</sub>} = min {${arr[i][m] == Infinity? '&#8734;' : arr[i][m]} + ${arr[m][j] == Infinity? '&#8734;' : arr[m][j]}, ${arr[i][j] == Infinity? '&#8734;' : arr[i][j]}} = ${arrNext[i][j] == Infinity? '&#8734;' : arr[i][j]}`);
 				}
 				else {
 					arrNext[i][j] = 0;
@@ -88,11 +92,11 @@ const addTable = (arr, m) => {
 			if (j == 0) {
 				table += `<td><b>x<sub>${i + 1}</sub></b></td>`;
 			} else {
-				table += `<td>${arr[i][j - 1]}</td>`;
+				table += `<td>${arr[i][j - 1] == Infinity? '&#8734;' : arr[i][j - 1]}</td>`;
 			}
 		}
 		table += '</tr>';
 	}
-table = `<p>D<sup>${m}</sup> = </p><table><tbody>${table}</tbody></table>`;
+table = `<a>D<sup>${m}</sup> = </a><table border="1"><tbody>${table}</tbody></table>`;
 	result.innerHTML += table;
 }

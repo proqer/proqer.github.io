@@ -1,34 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  <meta charset="utf-8">
-    <title>Алгоритм Флойда</title>
+
+<head>
+	<meta charset="utf-8">
+	<title>Алгоритм Флойда (Первые 6 шагов)</title>
 	<script src="./floyd.js"></script>
-	<style> 
-		.sub { 
-				vertical-align : sub; 
-				font-size      : 10px; 
-				letter-spacing : -4px; 
-		} 
-		.sup { 
-				vertical-align : super; 
-				font-size      : 10px; 
-		} 
-</style> 
-  </head>
-  <body>
-		<div style="margin-left: 25%">
-			<h2>Алгоритм Флойда</h2>
-			Размеры матрицы: <input id="size" maxlength="2" size="40" value="15">
-			<button onClick="changeTable()" style="margin-bottom: 10px">построить</button>
-			<table id="table" border="1" cellpadding="10">
-			
+</head>
+
+<body>
+	<div style="margin-left: 25%">
+		<h2>Алгоритм Флойда</h2>
+		<p  style="color:red">*Это займет какое-то время</p>
+		Размеры матрицы:
+		<input id="size" maxlength="2" size="40" value="15">
+		<button onClick="changeTable()" style="margin-bottom: 10px">построить</button>
+		<table id="table" border="1" cellpadding="10">
 			<tbody>
-			 </tbody>
-			</table>
-			<button onClick="solve()" style="margin-top: 10px">Решить</button>
-			<div id="res"></div>
-		</div>
-		<small style="top: 0; right: 0; position: absolute;">© 20!8 - 2019. Все права защищены.</small>
-  </body>
+			</tbody>
+		</table>
+		<button onClick="solve()" style="margin-top: 10px">Решить</button>
+		<div id="res"></div>
+	</div>
+	<small style="top: 0; right: 0; position: absolute;">© 2018 - 2019. Все права защищены.</small>
+</body>
+
 </html>

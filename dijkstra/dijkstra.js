@@ -17,7 +17,7 @@
 					if (j == 0) {
 						res += `<td><b>x<sub>${i+1}</sub></b></td>`;
 					} else {
-						res += `<td><div contenteditable>${i == j - 1 ? 0 : 99}</div></td>`;
+						res += `<td><div contenteditable>${i == j - 1 ? 0 : '&#8734;'}</div></td>`;
 					}
 				}
 				res += '</tr>';
@@ -37,31 +37,34 @@
 			let table = document.getElementById('table');
 			for (let i = 0; i < size; i++) {
 				for (let j = 0; j < size; j++) {
-					arr[i][j] = +table.firstElementChild.children[i + 1].children[j + 1].firstElementChild.outerText;
+					if (table.firstElementChild.children[i + 1].children[j + 1].firstElementChild.outerText == '∞'){
+						arr[i][j] = Infinity;
+					} else {
+						arr[i][j] = +table.firstElementChild.children[i + 1].children[j + 1].firstElementChild.outerText;
+					}
 				}
 			}
 			
 			let pathLengthArr = new Array(size);
-			pathLengthArr.fill(99);
+			pathLengthArr.fill(Infinity);
 			pathLengthArr[0] = 0;
 			
 			boolArr[0] = false;
 			addRecord(`y = x<sub>1</sub>`);
 			let current = 0;
-			
 			for (let i = 0; i < size - 1; i++) {
-				let min = 99;
+				let min = Infinity;
 				let minCoef = 0;
 
 				for (let j = 0; j < size; j++) {
 					if (boolArr[j]) {
-						let resStr = `d(x<sub>${j + 1}</sub>) = min{d(x<sub>${j + 1}</sub>), d(x<sub>${current + 1}</sub>) + a(x<sub>${current + 1}</sub>, x<sub>${j + 1}</sub>)} = min{${pathLengthArr[j] == 99 ? '&#8734;' : pathLengthArr[j]}, ${pathLengthArr[current]} + ${arr[current][j] == 99 ? '&#8734;' : arr[current][j]}} = `
+						let resStr = `d(x<sub>${j + 1}</sub>) = min{d(x<sub>${j + 1}</sub>), d(x<sub>${current + 1}</sub>) + a(x<sub>${current + 1}</sub>, x<sub>${j + 1}</sub>)} = min{${pathLengthArr[j] == Infinity ? '&#8734;' : pathLengthArr[j]}, ${pathLengthArr[current]} + ${arr[current][j] == Infinity ? '&#8734;' : arr[current][j]}} = `
 						pathLengthArr[j] = Math.min(pathLengthArr[j], pathLengthArr[current] + arr[current][j]);
 						if (pathLengthArr[j] < min) {
 							minCoef = j;
 							min = pathLengthArr[j];
 						}
-						resStr += `${pathLengthArr[j] == 99 ? '&#8734;' : pathLengthArr[j]}`;
+						resStr += `${pathLengthArr[j] == Infinity ? '&#8734;' : pathLengthArr[j]}`;
 						addRecord(resStr);
 					}
 				}
