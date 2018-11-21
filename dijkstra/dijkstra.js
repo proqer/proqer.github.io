@@ -71,8 +71,10 @@
 				boolArr[minCoef] = false;
 				addRecord(`y = x<sub>${minCoef + 1}</sub>`);
 				current = minCoef;
+				if (arr.length - 1 == current) {
+					return;
+				}
 			}
-	
 		}
 		
 		const addRecord = (str) => {
