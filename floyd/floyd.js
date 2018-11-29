@@ -75,7 +75,7 @@ const solve = () => {
 			for (let j = 0; j < size; j++) {
 				if (i != j) {
 					if (arr[i][m] + arr[m][j] < arr[i][j]) {
-						pathArrayNext[i][j] = `(x<sub>${i + 1}</sub>, x<sub>${m + 1}</sub>) - (x<sub>${m + 1}</sub>, x<sub>${j + 1})</sub>`;
+						pathArrayNext[i][j] = `(x<sub>${i + 1}</sub>, x<sub>${m + 1}</sub>) - (x<sub>${m + 1}</sub>, x<sub>${j + 1}</sub>)`;
 						arrNext[i][j] = arr[i][m] + arr[m][j];
 					} else {
 						arrNext[i][j] = arr[i][j];
