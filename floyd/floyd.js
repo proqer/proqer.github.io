@@ -115,23 +115,23 @@ const clearRecords = () => {
 const addTable = (arr, m) => {
 	const result = document.getElementById('res');
 	let table = '';
-	table += '<tr>';
-	table += '<td></td>';
-	for (let j = 0; j < arr.length; j++) {
-		table += `<td><b>x<sub>${j + 1}</sub></b></td>`;
-	}
-	table += '</tr>';
+	// table += '<tr>';
+	// table += '<td></td>';
+	// for (let j = 0; j < arr.length; j++) {
+	// 	table += `<td><b>x<sub>${j + 1}</sub></b></td>`;
+	// }
+	// table += '</tr>';
 	for (let i = 0; i < arr.length; i++) {
 		table += '<tr>';
-		for (let j = 0; j < arr.length + 1; j++) {
-			if (j == 0) {
-				table += `<td><b>x<sub>${i + 1}</sub></b></td>`;
-			} else {
-				table += `<td>${arr[i][j - 1] == Infinity ? '&#8734;' : arr[i][j - 1]}</td>`;
-			}
+		for (let j = 0; j < arr.length; j++) {
+			// if (j == 0) {
+			// 	table += `<td><b>x<sub>${i + 1}</sub></b></td>`;
+			// } else {
+			table += `<td>${arr[i][j] == Infinity ? '&#8734;' : arr[i][j]}</td>`;
+			//}
 		}
 		table += '</tr>';
 	}
-	table = `<div style="display: flex; align-items: center; padding: 5px"><a style="margin-right: 5px">D${m} = </a><table border="1"><tbody>${table}</tbody></table></div>`;
+	table = `<div style="display: flex; align-items: center; padding: 5px; white-space: pre"><a style="margin-right: 5px">D${m} = </a><table class="matrix"><tbody>${table}</tbody></table></div>`;
 	result.innerHTML += table;
 }

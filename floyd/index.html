@@ -5,12 +5,25 @@
 	<meta charset="utf-8">
 	<title>Алгоритм Флойда</title>
 	<script src="./floyd.js"></script>
+	<style>
+		table.matrix {
+			font-size: 14px;
+			text-align: left;
+			border-radius: 15px;
+			box-shadow: 2px 0 0px 0px black, -2px 0 0px 0px black;
+		}
+
+		table.matrix td {
+			padding: 8px;
+			background: transparent;
+		}
+	</style>
 </head>
 
 <body>
 	<div style="margin-left: 25%">
 		<h2>Алгоритм Флойда (Первые 6 шагов)</h2>
-		<p  style="color:red">*ЭТО ЗАЙМЕТ КАКОЕ-ТО ВРЕМЯ (+-30 СЕКУНД)</p>
+		<p style="color:red">*ЭТО ЗАЙМЕТ КАКОЕ-ТО ВРЕМЯ (+-30 СЕКУНД)</p>
 		Размеры матрицы:
 		<input id="size" maxlength="2" size="40" value="15">
 		<button onClick="changeTable()" style="margin-bottom: 10px">построить</button>
