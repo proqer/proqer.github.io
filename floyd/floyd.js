@@ -57,7 +57,7 @@ const solve = () => {
 			if (i == j) {
 				pathMatrix[i][j] = ' - ';
 			} else if (distanceMatrix[i][j] == Infinity) {
-				pathMatrix[i][j] = '( - )';
+				pathMatrix[i][j] = ' - ';
 			}
 			else {
 				pathMatrix[i][j] = `(x<sub>${i + 1}</sub>, x<sub>${j + 1}</sub>)`;

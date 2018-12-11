@@ -75,7 +75,7 @@ const solve = () => {
 				}
 				currentMatrix[m][j] = min;
 				if (min == Infinity) {
-					currentPathMatrix[m][j] = '( - )';
+					currentPathMatrix[m][j] = ' - ';
 				} else if (minCoefLeft == minCoefMid) {
 					currentPathMatrix[m][j] = `(x<sub>${minCoefMid + 1}</sub>, x<sub>${minCoefRight + 1}</sub>)`;
 				} else if (minCoefMid == minCoefRight) {
@@ -109,7 +109,7 @@ const solve = () => {
 				}
 				currentMatrix[i][m] = min;
 				if (min == Infinity) {
-					currentPathMatrix[i][m] = '( - )';
+					currentPathMatrix[i][m] = ' - ';
 				} else if (minCoefLeft == minCoefMid) {
 					currentPathMatrix[i][m] = `(x<sub>${minCoefMid + 1}</sub>, x<sub>${minCoefRight + 1}</sub>)`;
 				} else if (minCoefMid == minCoefRight) {
@@ -143,7 +143,7 @@ const solve = () => {
 				}
 			}
 		}
-		addTable(currentMatrix, `<sup>${m + 1}</sup>`);
+		addTable(currentMatrix, `<sup>${m + 1}</sup>`, m + 1);
 		addTable(currentPathMatrix, `<sub>${m + 1}</sub>`);
 		pastMatrix = currentMatrix;
 		pastPathMatrix = currentPathMatrix;
@@ -161,26 +161,30 @@ const clearRecords = () => {
 	res.innerHTML = '';
 }
 
-const addTable = (arr, m) => {
+const addTable = (arr, m, coef) => {
 	const result = document.getElementById('res');
-	let table = '';
-	// table += '<tr>';
-	// table += '<td></td>';
-	// for (let j = 0; j < arr.length; j++) {
-	// 	table += `<td><b>x<sub>${j + 1}</sub></b></td>`;
-	// }
-	// table += '</tr>';
+	let matrix = '';
 	for (let i = 0; i < arr.length; i++) {
-		table += '<tr>';
+		matrix += '<tr>';
 		for (let j = 0; j < arr.length; j++) {
-			// if (j == 0) {
-			// 	table += `<td><b>x<sub>${i + 1}</sub></b></td>`;
-			// } else {
-			table += `<td>${arr[i][j] == Infinity ? '&#8734;' : arr[i][j]}</td>`;
-			//}
+			matrix += `<td>${arr[i][j] == Infinity ? '&#8734;' : arr[i][j]}</td>`;
 		}
-		table += '</tr>';
+		matrix += '</tr>';
 	}
-	table = `<div style="display: flex; align-items: center; padding: 5px; white-space: pre"><a style="margin-right: 5px">D${m} = </a><table class="matrix"><tbody>${table}</tbody></table></div>`;
-	result.innerHTML += table;
+	let resDiv;
+	if (coef) {
+
+		let dMatrix = '';
+		for (let i = 0; i < arr.length; i++) {
+			dMatrix += '<tr>';
+			for (let j = 0; j < arr.length; j++) {
+				dMatrix += `<td>d<sup>${coef}</sup><sub>${i + 1} ${j + 1}</sub></td>`;
+			}
+			dMatrix += '</tr>';
+		}
+		resDiv = `<div style="display: flex; align-items: center; padding: 5px; white-space: pre"><a style="margin-right: 5px">D${m} = </a><table class="matrix"><tbody>${dMatrix}</tbody></table>  =  <table class="matrix"><tbody>${matrix}</tbody></table></div>`;
+	} else {
+		resDiv = `<div style="display: flex; align-items: center; padding: 5px; white-space: pre"><a style="margin-right: 5px">D${m} = </a><table class="matrix"><tbody>${matrix}</tbody></table></div>`;	
+	}
+	result.innerHTML += resDiv;
 }
